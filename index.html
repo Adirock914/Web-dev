@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arcloud — Fast, Secure & Affordable Hosting</title>
+  <meta name="description" content="Arcloud — Minecraft server hosting. Fast, secure & affordable." />
+  <link rel="icon" href="arcloud_logo.png" />
+
+  <style>
+    /* Basic reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(103,58,183,0.12), transparent 8%),
+                  radial-gradient(900px 400px at 90% 90%, rgba(13,71,161,0.08), transparent 8%),
+                  #0b0712;
+      color:#e9e5ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+    /* Header */
+    header{
+      background: linear-gradient(180deg, rgba(12,6,20,0.95), rgba(8,4,15,0.85));
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      padding:18px 20px;
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(6px);
+    }
+    .wrap{max-width:1100px;margin:0 auto}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:48px;height:48px;object-fit:contain;border-radius:8px;filter:drop-shadow(0 6px 20px rgba(88,0,255,0.12))}
+    .brand .title{font-weight:700;font-size:18px;color:#dcd6ff}
+    nav .links{display:flex;gap:14px;align-items:center}
+    .link{color:rgba(255,255,255,0.75);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:8px}
+    .link:hover{background: rgba(255,255,255,0.03)}
+    .cta{background:linear-gradient(90deg,#7c3aed,#3b82f6);padding:8px 12px;border-radius:10px;color:white;font-weight:700;text-decoration:none;box-shadow:0 8px 30px rgba(60,30,120,0.18)}
+    .menu-toggle{display:none;color:rgba(255,255,255,0.85);font-weight:700}
+
+    /* Hero */
+    .hero{
+      padding:48px 20px;
+      text-align:center;
+    }
+    .hero-inner{max-width:980px;margin:0 auto;padding:36px;border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow: 0 30px 80px rgba(12,6,30,0.6);}
+    .hero-logo{width:110px;height:110px;margin:0 auto 16px;filter:drop-shadow(0 14px 40px rgba(99,0,255,0.12))}
+    h1{font-size:40px;line-height:1.02;margin-bottom:10px;color: #fff; text-shadow: 0 8px 30px rgba(99,34,255,0.12)}
+    .tag{color:#bdb4ff;margin-bottom:20px;font-weight:600}
+    .sub{color:rgba(255,255,255,0.78);max-width:820px;margin:10px auto 22px;font-size:16px}
+
+    /* Pricing tabs */
+    .plans{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+      width:300px;padding:20px;border-radius:14px;box-shadow:0 12px 40px rgba(6,1,18,0.6);
+    }
+    .card .level{font-weight:800;margin-bottom:12px;font-size:18px}
+    .price{font-size:28px;font-weight:900;margin:6px 0;color:#ffd166}
+    .specs{margin:10px 0;padding:10px;border-radius:10px;background:rgba(255,255,255,0.01);font-weight:600}
+    .buy{display:flex;gap:8px;margin-top:14px}
+    .btn{
+      flex:1;padding:10px 12px;border-radius:10px;text-align:center;text-decoration:none;font-weight:800;
+      box-shadow:0 8px 26px rgba(59,50,120,0.12);
+    }
+    .btn-order{background:linear-gradient(90deg,#6d28d9,#2563eb);color:white}
+    .btn-mail{background:rgba(255,255,255,0.03);color:#dcd6ff;border:1px solid rgba(255,255,255,0.03)}
+
+    /* Features */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:40px 0}
+    .feature{background:rgba(255,255,255,0.02);padding:18px;border-radius:12px;font-weight:700;text-align:center}
+
+    /* CTA strip */
+    .cta-strip{margin:40px 0;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(124,58,237,0.12), rgba(59,130,246,0.06));display:flex;gap:18px;align-items:center;justify-content:space-between}
+    .cta-strip .left{font-weight:800;font-size:18px}
+    .cta-strip .code{background:linear-gradient(90deg,#6d28d9,#3b82f6);padding:8px 12px;border-radius:10px;font-weight:800;color:white}
+
+    /* FAQ */
+    .faq{margin:44px 0}
+    .faq h2{font-size:28px;margin-bottom:12px}
+    .accordion{background:rgba(255,255,255,0.01);border-radius:12px;padding:10px}
+    .q{padding:12px 14px;border-radius:10px;margin:8px 0;background:linear-gradient(180deg,rgba(255,255,255,0.005),transparent);cursor:pointer;font-weight:700}
+    .a{padding:12px 14px;color:rgba(255,255,255,0.75);display:none}
+
+    /* Footer */
+    footer{padding:32px 20px;margin-top:40px;border-top:1px solid rgba(255,255,255,0.02)}
+    .footer-grid{display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between}
+
+    /* responsiveness */
+    @media(max-width:980px){
+      .features{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:720px){
+      nav .links{display:none}
+      .menu-toggle{display:block}
+      .hero-inner{padding:24px}
+      .features{grid-template-columns:1fr}
+      .plans{flex-direction:column;align-items:center}
+      h1{font-size:28px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <img src="arcloud_logo.png" alt="Arcloud logo" class="logo">
+        <div>
+          <div class="title">Arcloud</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.55)">Minecraft Server Hosting</div>
+        </div>
+      </div>
+
+      <nav>
+        <div class="links">
+          <a class="link" href="#plans">Plans</a>
+          <a class="link" href="#features">Features</a>
+          <a class="link" href="#faq">FAQ</a>
+          <a class="cta" href="#order">Order</a>
+        </div>
+        <div class="menu-toggle">☰</div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <img src="arcloud_logo.png" alt="Arcloud" class="hero-logo">
+        <h1>Fast, Secure & Affordable Hosting</h1>
+        <div class="tag">Premium Minecraft server hosting — start at ₹99 / month</div>
+        <div class="sub">Low-latency NVMe storage, DDoS protection, 24/7 support and easy control panel. Get your server online in minutes.</div>
+
+        <!-- pricing -->
+        <div id="plans" style="margin-top:18px;text-align:center">
+          <div style="display:flex;justify-content:center;gap:12px;margin-bottom:10px;color:#cfc7ff">
+            <button onclick="scrollToSection('plans')" class="btn-mail" style="padding:8px 14px;border-radius:999px;border:none">Minecraft</button>
+            <button class="btn-mail" style="padding:8px 14px;border-radius:999px;border:none">Rust</button>
+            <button class="btn-mail" style="padding:8px 14px;border-radius:999px;border:none">GTA V</button>
+          </div>
+
+          <div class="plans" aria-hidden="false">
+            <!-- Basic 1 -->
+            <div class="card">
+              <div class="level">Basic - 1</div>
+              <div class="price">₹99 <span style="font-size:12px;color:rgba(255,255,255,0.6)">/month</span></div>
+              <div class="specs">1 GB RAM · 2 GB Disk · 100% CPU</div>
+              <div style="margin-top:8px;color:rgba(255,255,255,0.72)">Great for small private servers and testing.</div>
+              <div class="buy">
+                <a class="btn btn-order" href="https://discord.com/" target="_blank" rel="noopener">Order (Discord)</a>
+                <a class="btn btn-mail" href="mailto:business@arcloud.example?subject=Order%20Basic%201">Email</a>
+              </div>
+            </div>
+
+            <!-- Basic 2 -->
+            <div class="card">
+              <div class="level">Basic - 2</div>
+              <div class="price">₹199 <span style="font-size:12px;color:rgba(255,255,255,0.6)">/month</span></div>
+              <div class="specs">2 GB RAM · 4 GB Disk · 100% CPU</div>
+              <div style="margin-top:8px;color:rgba(255,255,255,0.72)">Perfect for small public servers with a handful of players.</div>
+              <div class="buy">
+                <a class="btn btn-order" href="https://discord.com/" target="_blank" rel="noopener">Order (Discord)</a>
+                <a class="btn btn-mail" href="mailto:business@arcloud.example?subject=Order%20Basic%202">Email</a>
+              </div>
+            </div>
+
+            <!-- Basic 3 -->
+            <div class="card">
+              <div class="level">Basic - 3</div>
+              <div class="price">₹499 <span style="font-size:12px;color:rgba(255,255,255,0.6)">/month</span></div>
+              <div class="specs">4 GB RAM · 6 GB Disk · 150% CPU</div>
+              <div style="margin-top:8px;color:rgba(255,255,255,0.72)">Good for medium servers with plugins/mods.</div>
+              <div class="buy">
+                <a class="btn btn-order" href="https://discord.com/" target="_blank" rel="noopener">Order (Discord)</a>
+                <a class="btn btn-mail" href="mailto:business@arcloud.example?subject=Order%20Basic%203">Email</a>
+              </div>
+            </div>
+
+            <!-- VIP -->
+            <div class="card">
+              <div class="level">VIP - 1</div>
+              <div class="price">₹599 <span style="font-size:12px;color:rgba(255,255,255,0.6)">/month</span></div>
+              <div class="specs">6 GB RAM · 10 GB Disk · 200% CPU</div>
+              <div style="margin-top:8px;color:rgba(255,255,255,0.72)">Fast & stable for growing communities.</div>
+              <div class="buy">
+                <a class="btn btn-order" href="https://discord.com/" target="_blank" rel="noopener">Order (Discord)</a>
+                <a class="btn btn-mail" href="mailto:business@arcloud.example?subject=Order%20VIP%201">Email</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="level">VIP - 2</div>
+              <div class="price">₹699 <span style="font-size:12px;color:rgba(255,255,255,0.6)">/month</span></div>
+              <div class="specs">8 GB RAM · 20 GB Disk · 200% CPU</div>
+              <div style="margin-top:8px;color:rgba(255,255,255,0.72)">Excellent for larger modded servers.</div>
+              <div class="buy">
+                <a class="btn btn-order" href="https://discord.com/" target="_blank" rel="noopener">Order (Discord)</a>
+                <a class="btn btn-mail" href="mailto:business@arcloud.example?subject=Order%20VIP%202">Email</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="level">VIP - 3</div>
+              <div class="price">₹799 <span style="font-size:12px;color:rgba(255,255,255,0.6)">/month</span></div>
+              <div class="specs">12 GB RAM · 30 GB Disk · 200% CPU</div>
+              <div style="margin-top:8px;color:rgba(255,255,255,0.72)">For big servers and networks.</div>
+              <div class="buy">
+                <a class="btn btn-order" href="https://discord.com/" target="_blank" rel="noopener">Order (Discord)</a>
+                <a class="btn btn-mail" href="mailto:business@arcloud.example?subject=Order%20VIP%203">Email</a>
+              </div>
+            </div>
+
+            <!-- Premium -->
+            <div class="card">
+              <div class="level">Premium - Infinity</div>
+              <div class="price">₹2999 <span style="font-size:12px;color:rgba(255,255,255,0.6)">/month</span></div>
+              <div class="specs">Unlimited RAM · Unlimited Disk · Unlimited CPU</div>
+              <div style="margin-top:8px;color:rgba(255,255,255,0.72)">Full dedicated resources and priority support.</div>
+              <div class="buy">
+                <a class="btn btn-order" href="https://discord.com/" target="_blank" rel="noopener">Order (Discord)</a>
+                <a class="btn btn-mail" href="mailto:business@arcloud.example?subject=Order%20Premium%20Infinity">Email</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- CTA strip -->
+        <div style="margin-top:26px">
+          <div class="cta-strip wrap">
+            <div class="left">Welcome offer — 20% off your first order!</div>
+            <div class="code">Use: ARWELCOME</div>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <div id="features" class="wrap" style="margin-top:28px">
+          <div class="features">
+            <div class="feature">24/7 Support</div>
+            <div class="feature">DDoS Protection</div>
+            <div class="feature">NVMe Storage</div>
+            <div class="feature">Easy Control Panel</div>
+            <div class="feature">Instant Setup</div>
+            <div class="feature">Worldwide Locations</div>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div id="faq" class="wrap faq">
+          <h2>Frequently Asked Questions</h2>
+          <div class="accordion">
+            <div class="q">What is Arcloud?</div>
+            <div class="a">Arcloud is a Minecraft server hosting provider offering low-latency NVMe servers, DDoS protection and 24/7 support.</div>
+
+            <div class="q">How do I order?</div>
+            <div class="a">Click any "Order (Discord)" button to join our Discord or send us an email using the Email button to start your order.</div>
+
+            <div class="q">Is DDoS protection included?</div>
+            <div class="a">Yes — we include basic to advanced DDoS protection depending on plan level.</div>
+
+            <div class="q">How soon is setup?</div>
+            <div class="a">Most servers are deployed instantly after payment. Some custom setups may require manual provisioning.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <img src="arcloud_logo.png" alt="Arcloud" style="width:56px;height:56px">
+        <div style="margin-top:8px;color:rgba(255,255,255,0.6)">© <span id="yr"></span> Arcloud — All rights reserved</div>
+      </div>
+
+      <div style="display:flex;gap:18px;align-items:center">
+        <a class="link" href="mailto:business@arcloud.example">business@arcloud.example</a>
+        <a class="link" href="https://discord.com/" target="_blank" rel="noopener">Discord</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // set year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // accordion
+    document.querySelectorAll('.q').forEach(q=>{
+      q.addEventListener('click',()=>{
+        const a = q.nextElementSibling;
+        if(a.style.display === 'block'){ a.style.display='none'; }
+        else { document.querySelectorAll('.a').forEach(x=>x.style.display='none'); a.style.display='block'; }
+      });
+    });
+
+    // simple menu toggle for small screens
+    document.querySelectorAll('.menu-toggle').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const links = document.querySelector('.links');
+        if(links.style.display === 'flex') links.style.display = 'none';
+        else links.style.display = 'flex';
+      });
+    });
+
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>
